@@ -103,7 +103,8 @@ problem in the code.
 ```c
 int* merge(int* a, int mid, int length) {
   int b[length];
-  int i, j = 0;
+  int i = 0;
+  int j = 0;
   int k = mid;
 
   while (i < length) {
