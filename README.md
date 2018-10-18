@@ -87,15 +87,15 @@ What does this program print:
 ## Call Stacks and Memory Management
 
 Consider the following (faulty) implementation of a merge sort
-function in C. The function `merge_sort` takes a pointer `a` to
-the first element of an array of integers and the length of the array
-`a` as input, and is supposed to sort the array in-place in
-ascending order. A few test runs of the compiled code produce correct
-results, which seems to indicate that the implementation is
+function in C. The function `merge_sort` takes a pointer `a` to the
+first element of an array of integers and the length of the array `a`
+as input, and is supposed to sort the array in-place in ascending
+order. A few test runs of the compiled code on a test machine produce
+correct results, which seems to indicate that the implementation is
 correct. However, there is a problem in the code that may cause
-`merge_sort` to produce unexpected results or even crash. What
-is this problem? Explain why some simple tests may not reveal this
-problem. Can you suggest a fix that solves it?
+`merge_sort` to produce unexpected results or even crash. What is this
+problem? Explain why some simple tests may not reveal this
+issue. Can you suggest a fix that solves it?
 
 Hint: you don't really need to understand merge sort to spot the
 problem in the code.
