@@ -32,7 +32,7 @@ Consider the following program:
 
 1. Under static scoping, what value does `g()` on line 14 return?
 
-   <details><summary>Solution</summary><p>`6`</p></details>
+   <details><summary>Solution</summary><p>{{6}}</p></details>
 
 1. Under dynamic scoping, what value does `g()` on line 14 return?
 
