@@ -101,7 +101,7 @@ the parameter passing modes for the parameters `x` and `y` of
    </details>
 
 
-2.  `x` is call-by-reference and `y` is call-by-value
+2. `x` is call-by-reference and `y` is call-by-value
 
    <details><summary>Solution</summary>
      <p>
@@ -232,18 +232,18 @@ void merge_sort(int* a, int length) {
      
 The problem is that the function `merge` returns a pointer to an array
 `b` that is allocated on the stack within the activation record of
-`merge`. Hence, when `merge` returns this pointer will be a dangling
-reference. When `merge_sort` executes the `for` loop after
-`merge_sort` returns and dereferences the returned pointer `b`, then
-this will have undefined behavior. In particular, the code may crash
-with a segmentation fault. However, the error may go undetected
-because the old contents of the array `b` from the call to `merge` may
-still reside in memory and so the `for` loop may actually copy the
-correct values back into the array `a`.
+`merge`. Hence, when `merge` returns, this pointer will be dangling.
+When `merge_sort` executes the `for` loop after `merge_sort` returns
+and dereferences the returned pointer `b`, then this will have
+undefined behavior. In particular, the code may crash with a
+segmentation fault. However, the error may go undetected because the
+old contents of the array `b` from the call to `merge` may still
+reside in memory and so the `for` loop may actually copy the correct
+values back into the array `a`.
 
 The problem can be solved by moving the `for` loop from `merge_sort`
-to the end of `merge_sort`. In this case, `merge_sort` does not need
-to return anything.
+to the end of `merge`. In this case, `merge` does not need
+a return value and its return type can be changed to `void`.
 
 </p>
 </details>
