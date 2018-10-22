@@ -34,6 +34,7 @@ Consider the following program:
 
    <details><summary>Solution</summary>
      <p>
+     
      ``` 
      6
      ```
