@@ -192,7 +192,7 @@ void merge_sort(int* a, int length) {
    ((a . 3) (b . 1) (c . 4) (d . 2))
    ```
    
-1. Write a Scheme function `drop` that drops every n-the element from
+1. Write a Scheme function `drop` that drops every n-th element from
    a list
    
    ```scheme
