@@ -95,7 +95,7 @@ the parameter passing modes for the parameters `x` and `y` of
      <p>
      
      ``` 
-     4 2
+     5 2
      ```
      </p>
    </details>
@@ -107,7 +107,7 @@ the parameter passing modes for the parameters `x` and `y` of
      <p>
      
      ``` 
-     4 3
+     5 3
      ```
      </p>
    </details>
