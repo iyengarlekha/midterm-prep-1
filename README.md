@@ -15,7 +15,7 @@ Consider the following program:
  4:   ()
  5: }
 
- 6: def g(): Unit = {
+ 6: def g(): Int = {
  7:   f()
  8:   b + 4
  9: }
