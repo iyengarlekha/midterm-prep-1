@@ -32,8 +32,8 @@ Consider the following program:
 
 1. Under static scoping, what value does `g()` on line 14 return?
 1. Under dynamic scoping, what value does `g()` on line 14 return?
-1. Under static scoping, what value does `h()` on line 18 return? 
-1. Under dynamic scoping, what value does `h()` on line 18 return? 
+1. Under static scoping, what value does `h()` on line 15 return? 
+1. Under dynamic scoping, what value does `h()` on line 15 return? 
 
 ## Parameter Passing Modes
 
