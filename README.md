@@ -42,16 +42,33 @@ Consider the following program:
 
 1. Under dynamic scoping, what value does `g()` on line 14 return?
 
-   <details><summary>Solution</summary><p>`6`</p></details>
+   <details><summary>Solution</summary>
+     <p>
+     
+     ``` 
+     6
+     ```
+     </p></details>
 
 1. Under static scoping, what value does `h()` on line 15 return? 
 
-   <details><summary>Solution</summary><p>`6`</p></details>
+   <details><summary>Solution</summary>
+     <p>
+     
+     ``` 
+     6
+     ```
+     </p></details>
 
 1. Under dynamic scoping, what value does `h()` on line 15 return? 
 
-   <details><summary>Solution</summary><p>`9`</p></details>
-
+   <details><summary>Solution</summary>
+     <p>
+     
+     ``` 
+     9
+     ```
+     </p></details>
 
 ## Parameter Passing Modes
 
@@ -73,9 +90,50 @@ the parameter passing modes for the parameters `x` and `y` of
 `params`:
 
 1. both `x` and `y` are call-by-value parameters
+
+   <details><summary>Solution</summary>
+     <p>
+     
+     ``` 
+     4 2
+     ```
+     </p>
+   </details>
+
+
 2.  `x` is call-by-reference and `y` is call-by-value
+
+   <details><summary>Solution</summary>
+     <p>
+     
+     ``` 
+     4 3
+     ```
+     </p>
+   </details>
+
+
 3. `x` is call-by-value and `y` is call-by-name
+
+   <details><summary>Solution</summary>
+     <p>
+     
+     ``` 
+     6 3
+     ```
+     </p>
+   </details>
+
 4. `x` is call-by-reference and `y` is call-by-name
+
+   <details><summary>Solution</summary>
+     <p>
+     
+     ``` 
+     7 4
+     ```
+     </p>
+   </details>
 
 ## Deep vs. Shallow Binding
 
@@ -100,7 +158,26 @@ f(0, h)()
 What does this program print:
 
 1. assuming static scoping and deep binding
+
+   <details><summary>Solution</summary>
+     <p>
+     
+     ``` 
+     0 1
+     ```
+     </p>
+   </details>
+
 1. assuming dynamic scoping and shallow binding
+
+   <details><summary>Solution</summary>
+     <p>
+     
+     ``` 
+     1 2
+     ```
+     </p>
+   </details>
 
 ## Call Stacks and Memory Management
 
@@ -150,6 +227,27 @@ void merge_sort(int* a, int length) {
 }
 ```
 
+<details><summary>Solution</summary>
+<p>
+     
+The problem is that the function `merge` returns a pointer to an array
+`b` that is allocated on the stack within the activation record of
+`merge`. Hence, when `merge` returns this pointer will be a dangling
+reference. When `merge_sort` executes the `for` loop after
+`merge_sort` returns and dereferences the returned pointer `b`, then
+this will have undefined behavior. In particular, the code may crash
+with a segmentation fault. However, the error may go undetected
+because the old contents of the array `b` from the call to `merge` may
+still reside in memory and so the `for` loop may actually copy the
+correct values back into the array `a`.
+
+The problem can be solved by moving the `for` loop from `merge_sort`
+to the end of `merge_sort`. In this case, `merge_sort` does not need
+to return anything.
+
+</p>
+</details>
+
 ## Lambda Calculus
 
 1. For each of the following lambda calculus terms, compute the set of
@@ -192,6 +290,29 @@ void merge_sort(int* a, int length) {
    d
    ```
    
+   <details><summary>Solution</summary>
+   <p>
+     
+   ```scheme
+   ; Tail-recursive solution (preferable in this case)
+   (define (find-nth n xs)
+     (if (eq? n 1) (car xs) (find-nth (- n 1) (cdr xs))))
+     
+   ; Solution with foldl (slightly convoluted)
+   (define (find-nth n xs)
+     (let ((helper 
+            (lambda (hd res) 
+              (match res
+                [(cons _ 1) (cons hd 0)]
+                [(cons x n) (cons x (- n 1))]))))
+                
+       (car (foldl helper (cons 'whatever n) xs)))) 
+   ```
+   </p>
+   </details>
+
+   
+   
 1. Write a Scheme function `pack` that packs consecutive elements of a
    list into sublists:
    
@@ -202,6 +323,37 @@ void merge_sort(int* a, int length) {
    ()
    ```
    
+   <details><summary>Solution</summary>
+   <p>
+     
+   ```scheme
+   ; Tail-recursive solution
+   (define (pack-helper xs curr-pack packed-xs)
+     (match xs 
+       [(cons hd tl) (if (equal? hd (car curr-pack))
+                         (pack-helper tl (cons hd curr-pack) packed-xs)
+                         (pack-helper tl (list hd) (cons curr-pack packed-xs)))]
+       ['() (reverse (cons curr-pack packed-xs))]))
+       
+   (define (pack xs)
+     (match xs
+       [(cons hd tl) (pack-helper tl (list hd) '())]
+       ['() '()]))
+       
+   ; Solution with foldl
+   (define (helper hd res)
+     (if (equal? hd (caar res))
+         (cons (cons hd (car res)) (cdr res))
+         (cons (list hd) res)))
+
+   (define (pack xs)
+     (match xs
+       [(cons hd tl) (reverse (foldl helper (list (list hd)) tl))]
+       ['() '()]))
+   ```
+   </p>
+   </details>
+   
 1. Write a Scheme function `encode` that computes the length encoding
    of a list (you can use the `pack` function as a subroutine).
    
@@ -209,6 +361,17 @@ void merge_sort(int* a, int length) {
    > (encode '(a a a b c c c c d d))
    ((a . 3) (b . 1) (c . 4) (d . 2))
    ```
+   
+   <details><summary>Solution</summary>
+   <p>
+     
+   ```scheme
+   (define (encode xs)
+     (let ((packed-xs (pack xs)))
+       (map (lambda (pack) (cons (car pack) (length pack))) packed-xs)))
+   ```
+   </p>
+   </details>
    
 1. Write a Scheme function `drop` that drops every n-th element from
    a list
@@ -220,6 +383,24 @@ void merge_sort(int* a, int length) {
    (a b d e)
    ```
 
+   <details><summary>Solution</summary>
+   <p>
+     
+   ```scheme
+   ; Tail-recursive solution
+   (define (drop-helper n k res xs)
+     (match xs
+       [(cons hd tl)
+        (if (eq? k 1)
+          (drop-helper n n res tl)
+          (drop-helper n (- k 1) (cons hd res) tl))]
+       ['() (reverse res)]))
+
+   (define (drop n xs) (drop-helper n n '() xs)) 
+   ```
+   </p>
+   </details>
+   
 Challenge yourself and try to implement these functions as efficiently
 as possible both with respect to run-time/space complexity as well as
 code complexity (e.g. use tail-recursion, use implementations based on
