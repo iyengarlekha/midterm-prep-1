@@ -198,6 +198,8 @@ void merge_sort(int* a, int length) {
    ```scheme
    > (drop 3 '(1 2 3 4 5 6 7 8 9 10))
    (1 2 4 5 7 8 10)
+   > (drop 3 '(a b c d e))
+   (a b d e)
    ```
 
 Challenge yourself and try to implement these functions as efficiently
