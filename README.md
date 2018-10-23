@@ -87,7 +87,7 @@ println(z)
 
 What does this program print if we make the following assumptions about
 the parameter passing modes for the parameters `x` and `y` of
-`params`:
+`f`:
 
 1. both `x` and `y` are call-by-value parameters
 
