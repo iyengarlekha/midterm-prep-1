@@ -370,15 +370,15 @@ a return value and its return type can be changed to `void`.
       
       *= (λ p. p `false`) (`pair` (`succ` (`fst` (`pair` `0` `0`))) `0`)*
       
-      *-> (`pair` (`succ` (`fst` (`pair` `0` `0`))) `0`) `false`
+      *-> (`pair` (`succ` (`fst` (`pair` `0` `0`))) `0`) `false`*
       
-      *= ((λ x y b. b x y) (`succ` (`fst` (`pair` `0` `0`))) `0`) `false`
+      *= ((λ x y b. b x y) (`succ` (`fst` (`pair` `0` `0`))) `0`) `false`*
       
-      *->->-> `false` (`succ` (`fst` (`pair` `0` `0`))) `0`
+      *->->-> `false` (`succ` (`fst` (`pair` `0` `0`))) `0`*
       
-      *= (λ x y. y) (`succ` (`fst` (`pair` `0` `0`))) `0`
+      *= (λ x y. y) (`succ` (`fst` (`pair` `0` `0`))) `0`*
       
-      *->-> `0`
+      *->-> `0`*
       </p>
       </details>
    
