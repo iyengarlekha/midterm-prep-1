@@ -254,20 +254,134 @@ a return value and its return type can be changed to `void`.
    free variables and show an alpha-renaming of the term such that no
    variable is bound more than once.
    
-   1. *(λ x. x y) z*
+   1. *(Î» x. x y) z*
    
-   1. *(λ x. (λ x. x) x) (λ x. x)*
+      <details><summary>Solution</summary>
+       <p>
+     
+       Free variables: *y, z*
+       
+       Renaming: *(Î» x. x y) z*
+     
+       </p>
+      </details>
    
-   1. *(λ x. (λ x. x) x) (λ x. x) y*
+   1. *(Î» x. (Î» x. x) x) (Î» x. x)*
+   
+      <details><summary>Solution</summary>
+       <p>
+     
+       Free variables: none
+       
+       Renaming: *(Î» x1. (Î» x2. x2) x1) (Î» x3. x3)*
+     
+       </p>
+      </details>
+   
+   1. *(Î» x. (Î» x. x) x) (Î» x. x) y*
+   
+      <details><summary>Solution</summary>
+       <p>
+     
+       Free variables: *y*
+       
+       Renaming: *(Î» x1. (Î» x2. x2) x1) (Î» x3. x3) y*
+     
+       </p>
+      </details>
+   
 
 1. Show the reductions to normal form of the following lambda calculus
    terms, assuming the definitions provided in the class notes:
 
    1. *`or` `false` `1`*
 
+      <details><summary>Solution</summary>
+      <p>
+     
+      *`or` `false` `1`*
+
+      *= (λ a b. a `true` b)* `false` `1`*
+     
+      *->-> `false` `true` `1`*
+     
+      *= (λ x y. y) `true` `1`*
+     
+      *->-> `1`*
+     
+      </p>
+      </details>
+
+
    1. *`iszero` `1` `2` `3`*
-   
+
+      <details><summary>Solution</summary>
+      <p>
+     
+      *`iszero` `1` `2` `3`*
+      
+      *= (λ n. n (λ x. `false`) `true`) `1` `2` `3`*
+      
+      *-> (`1` (λ x. `false`) `true`) `2` `3`*
+      
+      *= ((λ s z. s z) (λ x. `false`) `true`) `2` `3`*
+      
+      *->-> ((λ x. `false`) `true`) `2` `3`*
+      
+      *-> `false` `2` `3`
+      
+      *= `(λ x y. y)` `2` `3`
+      
+      *->-> `3`*
+
+      </p>
+      </details>
+
    1. *`pred` `1`*
+   
+      <details><summary>Solution</summary>
+      <p>
+     
+      *`pred` `1`*
+      
+      *= (λ n. `snd` (n (λ p. `pair` (`succ` (`fst` p)) (`fst` p)) (`pair` `0` `0`))) `1`*
+      
+      *-> `snd` (`1` (λ p. `pair` (`succ` (`fst` p)) (`fst` p)) (`pair` `0` `0`))*
+      
+      *= `snd` ((λ s z. s z) (λ p. `pair` (`succ` (`fst` p)) (`fst` p)) (`pair` `0` `0`))*
+      
+      *->-> `snd` ((λ p. `pair` (`succ` (`fst` p)) (`fst` p)) (`pair` `0` `0`))*
+  
+      *-> `snd` (`pair` (`succ` (`fst` (`pair` `0` `0`))) (`fst` (`pair` `0` `0`)))*
+      
+      *=  `snd` (`pair` (`succ` (`fst` (`pair` `0` `0`))) (`fst` ((λ x y b. b x y) `0` `0`)))*
+      
+      *->-> `snd` (`pair` (`succ` (`fst` (`pair` `0` `0`))) (`fst` (λ b. b `0` `0`)))*
+      
+      *= `snd` (`pair` (`succ` (`fst` (`pair` `0` `0`))) ((λ p. p `true`) (λ b. b `0` `0`)))*
+      
+      *-> `snd` (`pair` (`succ` (`fst` (`pair` `0` `0`))) ((λ b. b `0` `0`) `true`))*
+      
+      *-> `snd` (`pair` (`succ` (`fst` (`pair` `0` `0`))) (`true` `0` `0`))*
+      
+      *= `snd` (`pair` (`succ` (`fst` (`pair` `0` `0`))) ((λ x y. x) `0` `0`))*
+      
+      *->-> `snd` (`pair` (`succ` (`fst` (`pair` `0` `0`))) `0`)*
+      
+      *= (λ p. p `false`) (`pair` (`succ` (`fst` (`pair` `0` `0`))) `0`)*
+      
+      *-> (`pair` (`succ` (`fst` (`pair` `0` `0`))) `0`) `false`
+      
+      *= ((λ x y b. b x y) (`succ` (`fst` (`pair` `0` `0`))) `0`) `false`
+      
+      *->->-> `false` (`succ` (`fst` (`pair` `0` `0`))) `0`
+      
+      *= (λ x y. y) (`succ` (`fst` (`pair` `0` `0`))) `0`
+      
+      *->-> `0`
+      </p>
+      </details>
+   
    
    Show each beta-reduction step.
 
