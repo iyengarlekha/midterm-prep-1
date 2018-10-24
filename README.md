@@ -266,26 +266,26 @@ a return value and its return type can be changed to `void`.
        </p>
       </details>
    
-   1. *(Î» x. (Î» x. x) x) (Î» x. x)*
+   1. *(λ x. (λ x. x) x) (λ x. x)*
    
       <details><summary>Solution</summary>
        <p>
      
        Free variables: none
        
-       Renaming: *(Î» x1. (Î» x2. x2) x1) (Î» x3. x3)*
+       Renaming: *(λ x1. (λ x2. x2) x1) (λ x3. x3)*
      
        </p>
       </details>
    
-   1. *(Î» x. (Î» x. x) x) (Î» x. x) y*
+   1. *(λ x. (λ x. x) x) (λ x. x) y*
    
       <details><summary>Solution</summary>
        <p>
      
        Free variables: *y*
        
-       Renaming: *(Î» x1. (Î» x2. x2) x1) (Î» x3. x3) y*
+       Renaming: *(λ x1. (λ x2. x2) x1) (λ x3. x3) y*
      
        </p>
       </details>
