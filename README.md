@@ -254,14 +254,14 @@ a return value and its return type can be changed to `void`.
    free variables and show an alpha-renaming of the term such that no
    variable is bound more than once.
    
-   1. *(Î» x. x y) z*
+   1. *(λ x. x y) z*
    
       <details><summary>Solution</summary>
        <p>
      
        Free variables: *y, z*
        
-       Renaming: *(Î» x. x y) z*
+       Renaming: *(λ x. x y) z*
      
        </p>
       </details>
